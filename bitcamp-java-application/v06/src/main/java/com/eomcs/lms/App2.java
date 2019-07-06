@@ -15,27 +15,28 @@ public class App2 {
   public static void main(String[] args) {
     scan = new Scanner(System.in);
 
-    Lesson[] lessons = new Lesson[100];
+    int[] no = new int[100];
+    String[] name = new String[100];
+    String[] email = new String[100];
+    String[] password = new String[100];
+    String[] image = new String[100];
+    String[] phone = new String[100];
+    Date[] joinDate = new Date[100];
 
     int i = 0;
+    for (i = 0; i < no.length; i++) {
 
-    for (i = 0; i < lessons.length; i++) {
-
-      Lesson lesson = new Lesson();
-
-      lesson.no = getIntValue("번호?");
-      lesson.name = getStringValue("이름?");
-      lesson.email = getStringValue("이메일?");
-      lesson.password = getStringValue("암호?");
-      lesson.image = getStringValue("사진?");
-      lesson.phone = getStringValue("전화?");
-      lesson.joinDate = getDateValue("가입일?");
-
-      lessons[i] = lesson;
+      no[i] = getIntValue("번호?");
+      name[i] = getStringValue("이름?");
+      email[i] = getStringValue("이메일?");
+      password[i] = getStringValue("암호?");
+      image[i] = getStringValue("사진?");
+      phone[i] = getStringValue("전화?");
+      joinDate[i] = getDateValue("가입일?");
 
       System.out.println("계속입력하시겠습니까? (y/n)");
       String response = scan.nextLine();
-      
+
       if (response.equals("n")) {
         break;
       }
@@ -44,7 +45,7 @@ public class App2 {
       System.out.printf("%s,%s,%s,%s,%s,%s,%s\n", no[i2], name[i2], email[i2], password[i2],
           image[i2], phone[i2], joinDate[i2]);
     }
-
+    
     System.out.println();
   }
 
