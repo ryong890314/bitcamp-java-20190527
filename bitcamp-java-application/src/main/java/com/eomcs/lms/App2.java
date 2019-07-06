@@ -15,34 +15,35 @@ public class App2 {
   public static void main(String[] args) {
     scan = new Scanner(System.in);
 
-    Lesson[] lessons = new Lesson[100];
+    Member[] members = new Member[100];
 
     int i = 0;
 
-    for (i = 0; i < lessons.length; i++) {
+    for (i = 0; i < members.length; i++) {
 
-      Lesson lesson = new Lesson();
+      Member member = new Member();
 
-      lesson.no = getIntValue("번호?");
-      lesson.name = getStringValue("이름?");
-      lesson.email = getStringValue("이메일?");
-      lesson.password = getStringValue("암호?");
-      lesson.image = getStringValue("사진?");
-      lesson.phone = getStringValue("전화?");
-      lesson.joinDate = getDateValue("가입일?");
+      member.no = getIntValue("번호?");
+      member.name = getStringValue("이름?");
+      member.email = getStringValue("이메일?");
+      member.password = getStringValue("암호?");
+      member.photo = getStringValue("사진?");
+      member.tel = getStringValue("전화?");
+      member.registeredDate = getDateValue("가입일?");
 
-      lessons[i] = lesson;
+      members[i] = member;
 
       System.out.println("계속입력하시겠습니까? (y/n)");
       String response = scan.nextLine();
-      
+
       if (response.equals("n")) {
         break;
       }
     }
     for (int i2 = 0; i2 <= i; i2++) {
-      System.out.printf("%s,%s,%s,%s,%s,%s,%s\n", no[i2], name[i2], email[i2], password[i2],
-          image[i2], phone[i2], joinDate[i2]);
+      Member member = members[i2];
+      System.out.printf("%s,%s,%s,%s,%s,%s,%s\n", member.no, member.name, member.email,
+          member.password, member.photo, member.tel, member.registeredDate);
     }
 
     System.out.println();

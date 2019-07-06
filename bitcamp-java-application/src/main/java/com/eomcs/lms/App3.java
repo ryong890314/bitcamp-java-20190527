@@ -16,17 +16,19 @@ public class App3 {
 
     scan = new Scanner(System.in);
 
-    int[] no = new int[100];
-    String[] contents = new String[100];
-    Date[] writeDate = new Date[100];
-    int[] viewNum = new int[100];
+    Board[] boards = new Board[100];
 
     int i = 0;
-    for (i = 0; i < no.length; i++) {
-      no[i] = getIntValue("번호?");
-      contents[i] = getStringValue("내용?");
-      writeDate[i] = getDateValue("작성일?");
-      viewNum[i] = getIntValue("조회수?");
+    for (i = 0; i < boards.length; i++) {
+
+      Board board = new Board();
+
+      board.no = getIntValue("번호?");
+      board.contents = getStringValue("내용?");
+      board.createdDate = getDateValue("작성일?");
+      board.viewCount = getIntValue("조회수?");
+      
+      boards[i] = board;
 
       System.out.println("계속입력하시겠습니까? (y/n)");
       String response = scan.nextLine();
@@ -36,8 +38,11 @@ public class App3 {
       }
     }
     for (int i2 = 0; i2 <= i; i2++) {
-      System.out.printf("%s,%s,%s,%s\n", no[i2], contents[i2], writeDate[i2], viewNum[i2]);
+      Board board = boards[i2];
+      System.out.printf("%s,%s,%s,%s\n", board.no, board.contents, board.createdDate,
+          board.viewCount);
     }
+    System.out.println();
   }
 
   private static int getIntValue(String message) {
