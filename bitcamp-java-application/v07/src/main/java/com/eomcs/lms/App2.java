@@ -8,27 +8,30 @@ package com.eomcs.lms;
 import java.util.Scanner;
 import java.sql.Date;
 
-public class App3 {
+public class App2 {
 
   static Scanner scan;
 
   public static void main(String[] args) {
-
     scan = new Scanner(System.in);
 
-    Board[] boards = new Board[100];
+    Member[] members = new Member[100];
 
     int i = 0;
-    for (i = 0; i < boards.length; i++) {
 
-      Board board = new Board();
+    for (i = 0; i < members.length; i++) {
 
-      board.no = getIntValue("번호?");
-      board.contents = getStringValue("내용?");
-      board.createdDate = new Date(System.currentTimeMillis());
-      board.viewCount = getIntValue("조회수?");
-      
-      boards[i] = board;
+      Member member = new Member();
+
+      member.no = getIntValue("번호?");
+      member.name = getStringValue("이름?");
+      member.email = getStringValue("이메일?");
+      member.password = getStringValue("암호?");
+      member.photo = getStringValue("사진?");
+      member.tel = getStringValue("전화?");
+      member.registeredDate = getDateValue("가입일?");
+
+      members[i] = member;
 
       System.out.println("계속입력하시겠습니까? (y/n)");
       String response = scan.nextLine();
@@ -38,11 +41,23 @@ public class App3 {
       }
     }
     for (int i2 = 0; i2 <= i; i2++) {
-      Board board = boards[i2];
-      System.out.printf("%s,%s,%s,%s\n", board.no, board.contents, board.createdDate,
-          board.viewCount);
+      Member member = members[i2];
+      System.out.printf("%s,%s,%s,%s,%s,%s,%s\n", member.no, member.name, member.email,
+          member.password, member.photo, member.tel, member.registeredDate);
     }
+
     System.out.println();
+  }
+
+  private static Date getDateValue(String message) {
+    while (true) {
+      try {
+        System.out.print(message);
+        return Date.valueOf(scan.nextLine());
+      } catch (IllegalArgumentException e) {
+        System.out.println("2019-07-05 형식으로 입력하세요");
+      }
+    }
   }
 
   private static int getIntValue(String message) {
