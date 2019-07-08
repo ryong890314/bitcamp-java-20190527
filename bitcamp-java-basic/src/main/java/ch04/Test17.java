@@ -26,9 +26,9 @@ public class Test17 {
     // 표현식(expresstion)?
     // => 값을 리턴하는 문장(statement)
     
-    // int a = (age >= 19) ? m1() : m2(); // 컴파이 오류! 값을 리턴하는 문장이 와야됨!
+    // int a = (age >= 19) ? m1() : m2(); // 컴파일 오류! 값을 리턴하는 문장이 와야됨!
     
-    int b = (age >= 19) ? m2() : m2(); // 컴파이 오류
+    int b = (age >= 19) ? m2() : m2(); // 컴파일 오류
   }
   
   static void m1() {
