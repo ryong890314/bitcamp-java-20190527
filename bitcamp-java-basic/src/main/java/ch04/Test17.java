@@ -18,6 +18,24 @@ public class Test17 {
     System.out.println(result);
     System.out.println((age >= 19) ? "성인" : "미성년");
     System.out.println((age >= 65) ? "성인" : false);
+    
+    // 조건 ? 표현식 : 표현식
+    // 표현식이 아닌 것은 올 수 없다.
+
+    // (age >= 19) ? System.out.println("성인") : System.out.println("미성년"); // 컴파일 오류
+    // 표현식(expresstion)?
+    // => 값을 리턴하는 문장(statement)
+    
+    // int a = (age >= 19) ? m1() : m2(); // 컴파이 오류! 값을 리턴하는 문장이 와야됨!
+    
+    int b = (age >= 19) ? m2() : m2(); // 컴파이 오류
+  }
+  
+  static void m1() {
+    
+  }
+  static int m2() {
+    return 0;
   }
 }
 
