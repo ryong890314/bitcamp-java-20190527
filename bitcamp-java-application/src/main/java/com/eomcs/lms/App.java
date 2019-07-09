@@ -7,6 +7,7 @@ package com.eomcs.lms;
 
 import java.util.Scanner;
 import com.eomcs.lms.handler.BoardHandler;
+import com.eomcs.lms.handler.BoardHandler2;
 import com.eomcs.lms.handler.LessonHandler;
 import com.eomcs.lms.handler.MemberHandler;
 import com.eomcs.lms.util.Input;
@@ -26,6 +27,7 @@ public class App {
     LessonHandler.keyScan = keyScan;
     MemberHandler.keyScan = keyScan;
     BoardHandler.keyScan = keyScan;
+    BoardHandler2.keyScan = keyScan;
 
     while (true) {
 
@@ -51,6 +53,12 @@ public class App {
 
       } else if (command.contentEquals("/board/list")) {
         BoardHandler.listBoard();
+
+      } else if (command.contentEquals("/board2/add")) {
+        BoardHandler2.addBoard();
+
+      } else if (command.contentEquals("/board2/list")) {
+        BoardHandler2.listBoard();
 
       } else {
         System.out.println("해당 명령을 지원하지 않습니다!");
