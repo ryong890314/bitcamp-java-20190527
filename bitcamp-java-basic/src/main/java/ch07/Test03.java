@@ -36,6 +36,7 @@ public class Test03 {
     s1 = new Score(); // Score 설계도에 따라 메모리(변수들)를 준비시킨다.
                       // 그리고 메모리의 주소를 레퍼런스에 저장한다.
     
+    // 클래스가 가지고있는 정보 
     Class c = Class.forName("ch07.Test03$Score");
     Score s3 = (Score)c.newInstance();
     
