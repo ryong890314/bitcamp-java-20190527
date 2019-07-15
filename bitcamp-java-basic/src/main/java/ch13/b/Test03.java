@@ -10,9 +10,9 @@ public class Test03 {
     // => Score2나 다를 바가 없다. 다만 Score3는 compute()를 오버라이딩 했다.
     Score3 s = new Score3();
     s.setName("홍길동"); // Score의 메서드
-    s.setKor(100); // Score의 메서드
-    s.setEng(100); // Score의 메서드
-    s.setMath(100); // Score의 메서드
+    s.setKor(100); // Score3의 메서드
+    s.setEng(100); // Score3의 메서드
+    s.setMath(100); // Score3의 메서드
     s.setMusic(100); // Score3의 메서드
     s.setArt(100); // Score3의 메서드
     System.out.printf("%s: %d(%.1f)\n", s.getName(), s.getSum(), s.getAver());
