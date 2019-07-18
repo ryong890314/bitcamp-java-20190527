@@ -91,15 +91,6 @@ public class App {
       } else if (command.contentEquals("/board2/list")) {
         boardHandler2.listBoard();
 
-      } else if (command.contentEquals("/board2/detail")) {
-        boardHandler2.detailBoard();
-
-      } else if (command.contentEquals("/board2/update")) {
-        boardHandler2.updateBoard();
-
-      } else if (command.contentEquals("/board2/delete")) {
-        boardHandler2.deleteBoard();
-
       } else {
         System.out.println("해당 명령을 지원하지 않습니다!");
 
