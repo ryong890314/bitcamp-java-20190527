@@ -1,9 +1,9 @@
 // LinkedList : 목록으로 다루는 값을 특정 타입으로 제한하기 위해 제네릭(generic) 적용하기
-package com.eomcs.util;
+package algorithm.data_structure.queue.step3;
 
 import java.lang.reflect.Array;
 
-public class LinkedList<T> implements List<T> {
+public class LinkedList<T> {
   Node<T> head;
   Node<T> tail;
   int size = 0;
@@ -13,7 +13,6 @@ public class LinkedList<T> implements List<T> {
     // tail = head; // 같은 주소
   }
 
-  @Override
   public boolean add(T value) {
     Node<T> temp = new Node<>(value);
     if (head == null)
@@ -30,7 +29,6 @@ public class LinkedList<T> implements List<T> {
     return true;
   }
 
-  @Override
   public T get(int index) {
     if (index < 0 || index >= size) {
       throw new IndexOutOfBoundsException("인덱스가 유효하지 않습니다.");
@@ -42,7 +40,6 @@ public class LinkedList<T> implements List<T> {
     return node.value;
   }
 
-  @Override
   // 특정 위치의 값을 바꾼다.
   public T set(int index, T value) {
 
@@ -59,7 +56,6 @@ public class LinkedList<T> implements List<T> {
 
   }
 
-  @Override
   public T remove(int index) {
     if (index < 0 || index >= size) {
       throw new IndexOutOfBoundsException("인덱스가 유효하지 않습니다.");
@@ -94,12 +90,10 @@ public class LinkedList<T> implements List<T> {
     return oldVal;
   }
 
-  @Override
   public int size() {
     return size;
   }
 
-  @Override
   public void clear() {
 
     if (size == 0) // 빼도 상관없음
@@ -117,7 +111,6 @@ public class LinkedList<T> implements List<T> {
     size = 0;
   }
 
-  @Override
   public Object[] toArray() {
     // LinkedList에 있는 데이터를 저장할 배열을 준비한다.
 
@@ -145,7 +138,6 @@ public class LinkedList<T> implements List<T> {
     return arr;
   }
 
-  @Override
   @SuppressWarnings("unchecked")
   public T[] toArray(T[] a) {
 
