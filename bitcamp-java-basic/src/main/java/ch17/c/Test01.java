@@ -1,4 +1,4 @@
-// 정렬 객체를 일관성 있게 사용하려면 같은 타입으로 묶어야 한다. 
+// 정렬 객체를 일관성 있게 사용하려면 같은 타입으로 묶어야 한다. 상속의 generalization 이용!
 package ch17.c;
 
 public class Test01 {
@@ -6,7 +6,6 @@ public class Test01 {
   public static void main(String[] args) {
     int[] values = {23, 7, 12, 15, 9, 2, 22, 8, 11, 25, 13, 5};
     int[] values2 = {23, 7, 12, 15, 9, 2, 22, 8, 11, 25, 13, 5};
-    int[] values3 = {23, 7, 12, 15, 9, 2, 22, 8, 11, 25, 13, 5};
     
     // 정렬 객체를 사용하는 방법을 통일하면 사용하기가 쉬워진다.
     // 어떻게?
@@ -25,7 +24,6 @@ public class Test01 {
     //    수퍼 클래스로서 사용하도록 만든 것이다.
     // => Sorter는 직접 사용하려고 만든 것이 아니다.
     // => 이런 문제를 해결하기 위해 등장한 문법이 "추상 클래스"이다.
-    display(new Sorter(), values3);
     
   }
 
