@@ -44,9 +44,17 @@ public class Test08 {
     // 따라서 다음과 같이 Iterator를 사용하려 하면 실행 오류가 발생한다.
     // 해결책?
     // => 값을 변경하면 다시 Iterator를 얻어야 한다.
-    // 
-    System.out.println(iterator.next());
-    System.out.println(iterator.next());
+    //
+    
+    //HashMap과 마찬가지로 Iterator를 얻은 후에
+    // Hashtable의 값을 변경했다면
+    // 다음과 같이 다시 Iterator를 얻어야 한다.
+    iterator = keySet.iterator();
+    
+    while (iterator.hasNext()) {
+      
+      System.out.println(iterator.next());
+    }
     
   }
 }
@@ -55,10 +63,10 @@ public class Test08 {
 HashMap과 Hashtable의 비교
 항목                               HashMap           Hashtable
 ------------------------------------------------------------------------
-1) key, value null 허용         |    Yes         |      No
-2) Thread-safe                 |     No         |      Yes
+1) key, value null 허용       |    Yes         |      No
+2) Thread-safe          |     No         |      Yes
 3) 멀티 스레드 환경에서 실행 속도     |    속도 빠름     |      속도 느림
-4) 고수준의 동기화 처리             |     No         |   ConcurrentHashMap 사용을 권장한다.  
+4) 고수준의 동기화 처리                  |     No         |   ConcurrentHashMap 사용을 권장한다.  
  */
 
 

@@ -1,7 +1,6 @@
 // 중첩 클래스 종류 
 package ch19.a;
 
-
 public class Test02 {
 
   // 중첩 클래스
@@ -45,7 +44,6 @@ public class Test02 {
     Object obj = new Object() {
       // Object 클래스를 상속 받은 익명 클래스를 만들고,
       // f1() 메서드를 추가한다.
-      @Override
       public void f1() {
         System.out.println("Hellow");
       }
