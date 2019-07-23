@@ -4,7 +4,7 @@ package ch18.a1;
 public class Test01 {
 
   public static void main(String[] args) {
-    // 개개체의 기능을 사용해보자!
+    // 객체의 기능을 사용해보자!
     // =>각 도구의 사용법이 다르기 때문에 각 도구에 맞는 메서드를 준배해야 한다.
     // => 그래서 각 도구에 맞는 use()메서드를 각각 따로 준비했다.
     
