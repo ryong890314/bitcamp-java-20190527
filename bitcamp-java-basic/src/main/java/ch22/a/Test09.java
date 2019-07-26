@@ -19,8 +19,7 @@ public class Test09 {
           f.length(),
           f.getName());
     }
-    
-  }    
+  }
 }
 
 

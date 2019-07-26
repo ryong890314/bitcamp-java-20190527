@@ -32,6 +32,7 @@ public class Test01_2 {
           break;
         System.out.print(Integer.toHexString(b) + " ");
       }
+      
       */
       while ((b = in.read()) != -1) {
         System.out.print(Integer.toHexString(b) + " ");

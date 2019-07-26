@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 public class Test02_2 {
   public static void main(String[] args) {
     
+    
     // 파일의 바이너리 데이터를 읽어 배열에 저장한다.
     try {
       FileInputStream in = new FileInputStream("data.bin");
