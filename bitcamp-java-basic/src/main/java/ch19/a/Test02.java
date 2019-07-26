@@ -12,7 +12,7 @@ public class Test02 {
   static class A {} // ex)Test02.A obj = new Test02.A();
   
   // => 다른 스태틱 멤버
-  static int a; // ex Test02.a = 100;
+  static int a; // ex) Test02.a = 100;
   static void f1() {} // ex) Test02.f1();
   static {} // 클래스 로딩할 때 자동으로 실행
   
@@ -23,7 +23,7 @@ public class Test02 {
   // 다른 인스턴스 멤버
   int b; // ex) t.b =100;
   void f2() {} // ex) t.f2();
-  {} // 인스턴스가 생성된 후 새성자 호출 전에 실행
+  {} // 인스턴스가 생성된 후 생성자 호출 전에 실행
   
   public static void main(String[] args) {
     // 3) local class
