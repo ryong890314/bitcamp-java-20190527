@@ -5,7 +5,7 @@ package ch22.b.byte_stream;
 import java.io.FileOutputStream;
 
 public class Test01_1 {
-  public static void main(String[] args) {
+  public static void main(String[] args) throws Exception {
     // 바이너리 데이터?
     // => character set(문자표) 규칙에 따라 작성한 파일이 아닌 파일.
     // => 메모장으로 편집이 불가능한 파일.
@@ -27,7 +27,7 @@ public class Test01_1 {
     
     // 파일로 바이너리 데이터 출력
     // => FileOutputStream 클래스를 사용한다.
-    try {
+
       // 1) 데이터를 출력을 담당할 객체를 생성한다.
       FileOutputStream out = new FileOutputStream("data.bin");
       
@@ -46,12 +46,7 @@ public class Test01_1 {
       out.write('A'); // 0x0041
       out.write('가'); // 0xac00
       
-      
       out.close();
-      
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
     
     System.out.println("출력 완료!");
   }

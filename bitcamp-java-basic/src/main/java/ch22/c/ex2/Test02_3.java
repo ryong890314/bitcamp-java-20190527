@@ -2,6 +2,7 @@
 package ch22.c.ex2;
 
 import java.io.FileOutputStream;
+import ch22.c.ex2.BufferedOutputStream;
 
 public class Test02_3 {
   public static void main(String[] args) {
