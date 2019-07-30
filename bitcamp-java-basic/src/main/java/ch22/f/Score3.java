@@ -44,14 +44,19 @@ public class Score3 implements Serializable {
 
   // Test3_1을 실행하여 score3.data 파일에 인스턴스를 출력한 후,
   // tel 필드를 추가하고 toString() 메서드를 재생성한다.
+
+  
   @Override
   public String toString() {
     return "Score3 [name=" + name + ", tel=" + tel + ", kor=" + kor + ", eng=" + eng + ", math="
         + math + ", sum=" + sum + ", aver=" + aver + "]";
   }
 
-  //Test3_1을 실행하여 score3.data 파일에 인스턴스를 출력한 후,
-  // tel 필드를 추가하고 getter/setter 를 추가한다.
+  
+  public String getName() {
+    return name;
+  }
+
   public String getTel() {
     return tel;
   }
@@ -59,10 +64,7 @@ public class Score3 implements Serializable {
   public void setTel(String tel) {
     this.tel = tel;
   }
-  
-  public String getName() {
-    return name;
-  }
+
 
   public void setName(String name) {
     this.name = name;

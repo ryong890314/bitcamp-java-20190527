@@ -13,8 +13,8 @@ public class Score3 implements Serializable {
   private int math;
   
   // serialize 대상에서 제외할 필드는 transient로 선언한다.
-  transient private int sum;
-  transient private float aver;
+   transient private int sum;
+   transient private float aver;
 
   public Score3() {
     System.out.println("Score3()");
