@@ -1,13 +1,6 @@
 // v4 : 수업관리시스템의 데이터를 로딩하고 저장하는 코드를 옵저버로 분리한다.
 package com.eomcs.lms;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
@@ -51,9 +44,8 @@ public class App {
 
   // App 객체가 사용할 값을 모아두는 바구니 준비
   Map<String, Object> beanContainer = new HashMap<>();
-  
-  Scanner keyScan;
 
+  Scanner keyScan;
 
   @SuppressWarnings("unchecked")
   private void service() {
@@ -61,16 +53,16 @@ public class App {
     // 애플리케이션의 서비스를 시작할 때 등록된 옵저버에게 알린다.
     for (ApplicationContextListener listener : appCtxListeners) {
       listener.contextInitialized(beanContainer);
-      
+
     }
-    
+
     // 옵저버에게 보고한 후 옵저버가 준비한 객체를 꺼낸다.
     List<Lesson> lessonList = (List<Lesson>) beanContainer.get("lessonList");
     List<Member> memberList = (List<Member>) beanContainer.get("memberList");
     List<Board> boardList = (List<Board>) beanContainer.get("boardList");
 
     keyScan = new Scanner(System.in);
-    
+
     Deque<String> commandStack = new ArrayDeque<>(); // Stack 대신
     Queue<String> commandQueue = new LinkedList<>(); // Queue 대신
 
@@ -130,7 +122,7 @@ public class App {
     } // while
 
 
-    
+
     // 애플리케이션의 서비스를 시작할 때 등록된 옵저버에게 알린다.
     for (ApplicationContextListener listener : appCtxListeners) {
       listener.contextDestroyed(beanContainer);
@@ -152,28 +144,26 @@ public class App {
     }
   }
 
+
+
   private String prompt() {
     System.out.print("명령> ");
     return keyScan.nextLine();
-
   }
 
-  
-
   // ApplicationContextListener 옵저버를 등록하는 메서드
-  
+
   public void addApplicationContextListener(ApplicationContextListener listener) {
     this.appCtxListeners.add(listener);
   }
-  
+
   public static void main(String[] args) {
     App app = new App();
-    
+
     // 애플리케이션을 시작하거나 종료할 때 보고를 받고자 하는 객체를 등록한다.
     app.addApplicationContextListener(new HelloApplicationContextListener());
     app.addApplicationContextListener(new DataLoaderListener());
-    
-    
+
     app.service();
   }
 }
