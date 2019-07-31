@@ -1,4 +1,4 @@
-package design_pattern.observer.before;
+package design_pattern.observer.before.v6;
 
 public class Car {
   public void start() {
