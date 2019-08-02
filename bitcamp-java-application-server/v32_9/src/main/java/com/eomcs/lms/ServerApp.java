@@ -1,16 +1,25 @@
-// v32_11: Servlet 클래스에서 파일 데이터 저장 기능을 별도의 클래스로 분리하기
+// v32_9: 회원/수업/게시물 요청을 처리하는 클래스를 패키지로 분류한다.
 package com.eomcs.lms;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import com.eomcs.lms.domain.Lesson;
+import com.eomcs.lms.domain.Member;
 import com.eomcs.lms.servlet.BoardServlet;
 import com.eomcs.lms.servlet.LessonServlet;
 import com.eomcs.lms.servlet.MemberServlet;
 
 public class ServerApp {
 
+  static ArrayList<Member> memberList = new ArrayList<>();
+  static ArrayList<Lesson> lessonList = new ArrayList<>();
+  
+  static ObjectInputStream in;
+  static ObjectOutputStream out;
+  
   public static void main(String[] args) {
     System.out.println("[수업관리시스템 서버 애플리케이션]");
 
@@ -24,10 +33,15 @@ public class ServerApp {
         
         System.out.println("클라이언트와 연결되었음.");
         
+        // 다른 메서드가 사용할 수 있도록 입출력 스트림을 스태틱 변수에 저장한다.
+        ServerApp.in = in;
+        ServerApp.out = out;
+        
         BoardServlet boardServlet = new BoardServlet(in, out);
         LessonServlet lessonServlet = new LessonServlet(in, out);
         MemberServlet memberServlet = new MemberServlet(in, out);
         
+        loop:
         while (true) {
           // 클라이언트가 보낸 명령을 읽는다.
           String command = in.readUTF();
@@ -36,30 +50,49 @@ public class ServerApp {
           if (command.startsWith("/board/")) {
             boardServlet.service(command);
             out.flush();
+            continue;
           } else if (command.startsWith("/lesson/")) {
             lessonServlet.service(command);
             out.flush();
+            continue;
           } else if (command.startsWith("/member/")) {
             memberServlet.service(command);
             out.flush();
-          } else if (command.equals("quit")) {
-            out.writeUTF("ok");
-            out.flush();
-            break;
-          } else {
-            out.writeUTF("fail");
-            out.writeUTF("지원하지 않는 명령입니다.");
+            continue;
+          }
+          // 명령어에 따라 처리한다.
+          switch (command) {
+//            case "/member/add":
+//              addMember();
+//              break;
+//            case "/member/list":
+//              listMember();
+//              break;
+//            case "/member/delete":
+//              deleteMember();
+//              break;  
+//            case "/member/detail":
+//              detailMember();
+//              break;
+//            case "/member/update":
+//              updateMember();
+//              break;
+            case "quit":
+              out.writeUTF("ok");
+              break loop;
+            default:
+              out.writeUTF("fail");
+              out.writeUTF("지원하지 않는 명령입니다.");
           }
           out.flush();
           System.out.println("클라이언트에게 응답 완료!");
+          
         } // loop:
-        // 클라이언트와 연결을 끊기 전에 작업 내용을 파일에 저장한다.
-        boardServlet.saveData();
-        lessonServlet.saveData();
-        memberServlet.saveData();
-        
+//        out.flush();
       } 
-      System.out.println("클라이언트와 연결을 끊었음.");
+      
+//      System.out.println("클라이언트와 연결을 끊었음.");
+      
     } catch (Exception e) {
       e.printStackTrace();
     }
