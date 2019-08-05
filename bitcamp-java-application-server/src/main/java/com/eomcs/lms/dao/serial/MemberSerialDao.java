@@ -1,11 +1,12 @@
-package com.eomcs.lms.dao;
+package com.eomcs.lms.dao.serial;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
+import com.eomcs.lms.dao.MemberDao;
 import com.eomcs.lms.domain.Member;
 
-public class MemberSerialDao extends AbstractDataSerializer<Member, Integer>{
+public class MemberSerialDao extends AbstractDataSerializer<Member, Integer> implements MemberDao{
 
   public MemberSerialDao(String file) throws ClassNotFoundException {
     super(file);
@@ -47,23 +48,23 @@ public class MemberSerialDao extends AbstractDataSerializer<Member, Integer>{
     }
     return -1;
   }
-
+  @Override
   public int insert(Member member) throws Exception {
     list.add(member);
     return 1;
   }
-
+  @Override
   public List<Member> findAll() throws Exception {
     return list;
   }
-
+  @Override
   public Member findBy(int no) throws Exception {
     int index = indexOf(no);
     if (index == -1)
       return null;
     return list.get(index);
   }
-
+  @Override
   public int update(Member member) throws Exception {
     int index = indexOf(member.getNo());
     if (index == -1)
@@ -71,7 +72,7 @@ public class MemberSerialDao extends AbstractDataSerializer<Member, Integer>{
     list.set(index,  member);
     return 1;
   }
-
+  @Override
   public int delete(int no) throws Exception {
     int index = indexOf(no);
     if (index == -1)
