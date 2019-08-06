@@ -1,4 +1,4 @@
-// 계산기 클라이언트 만들기 - 5단계: 사용자가 quit을 입력하기 전까지 계속 서버와 연결된 상태로 있기
+// 계산기 클라이언트 만들기 - 6단계: 사용자가 quit을 입력하기 전까지 계속 서버와 연결된 상태로 있기
 package ch23.c;
 
 import java.io.BufferedReader;
@@ -36,6 +36,7 @@ public class CalculatorClient {
         BufferedReader in = new BufferedReader(
             new InputStreamReader(socket.getInputStream()))) {
       
+      // 서버에서 빈 문자열을 보낼 때까지 읽어서 화면에 출력한다.
       while (true) {
         String input = in.readLine();
         System.out.println(input);
