@@ -23,24 +23,28 @@ public class BoardUpdateCommand implements Command {
 
   @Override
   public void execute() {
-
+    Board board = new Board();
+    
+    board.setNo(input.getStringValue("번호?"));
     int no = input.getIntValue("번호?");
 
     try {
-      Board board = boardDao.findBy(no);
-      if (board == null) {
-        System.out.println("해당 번호의 데이터가 없습니다!");
-        return;
-      }
-
-      String str = input.getStringValue("내용? ");
-      if (str.length() > 0) {
-        board.setContents(str);
-      }
-
-      boardDao.update(board);
-      System.out.println("데이터를 변경하였습니다.");
-
+      
+      
+//      Board board = boardDao.findBy(no);
+//      if (board == null) {
+//        System.out.println("해당 번호의 데이터가 없습니다!");
+//        return;
+//      }
+//
+//      String str = input.getStringValue("내용? ");
+//      if (str.length() > 0) {
+//        board.setContents(str);
+//      }
+//
+//      boardDao.update(board);
+//      System.out.println("데이터를 변경하였습니다.");
+//
     } catch (Exception e) {
       System.out.println("데이터 변경에 실패했습니다!");
       System.out.println(e.getMessage());

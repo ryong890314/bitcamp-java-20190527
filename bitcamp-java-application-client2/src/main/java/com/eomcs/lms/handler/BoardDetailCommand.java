@@ -27,16 +27,17 @@ public class BoardDetailCommand implements Command {
     int no = input.getIntValue("번호? ");
 
     try {
-      Board board = boardDao.findBy(no);
+      
+      boardDao.findBy(no);
 
-      if (board == null) {
-        System.out.println("해당 게시글을 찾을 수 없습니다.");
-        return;
-
-      }
-
-      System.out.printf("내용:%s\n", board.getContents());
-      System.out.printf("작성일:%s\n", board.getCreatedDate());
+//      if (board == null) {
+//        System.out.println("해당 게시글을 찾을 수 없습니다.");
+//        return;
+//
+//      }
+//
+//      System.out.printf("내용:%s\n", board.getContents());
+//      System.out.printf("작성일:%s\n", board.getCreatedDate());
 
     } catch (Exception e) {
       System.out.println("데이터 조회에 실패했습니다.");
