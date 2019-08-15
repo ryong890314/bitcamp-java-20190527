@@ -20,10 +20,10 @@ public class ChatClient extends Frame implements ActionListener {
 
   TextField addressTF = new TextField(20);
   TextField portTF = new TextField(4);
-  Button connectBtn = new Button("연결");
+  Button connectBtn = new Button("CONNECT");
   TextArea chattingPane = new TextArea();
   TextField messageTF = new TextField();
-  Button sendBtn = new Button("보내기");
+  Button sendBtn = new Button("SEND");
   
   Socket socket;
   BufferedReader in;
