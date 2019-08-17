@@ -72,7 +72,7 @@ public class ChatServer {
           new Thread(new MessageSender(message)).start();
         }
         
-        // 채팅 방에 참여한 모든 사람들에게 퇴장 메시지를 전달한다.
+        // 채팅방에 참여한 모든 사람들에게 퇴장 메시지를 전달한다.
         
       } catch (Exception e) {
         e.printStackTrace();
