@@ -17,7 +17,7 @@ from lect_appl la
 
 /* => 1단계: 수강신청 데이터를 출력 */
 select la.lano, la.lno, la.mno, la.rdt
-from lect_appl la; 
+from lect_appl la;
 
 /* => 2단계 : 서브 쿼리를 이용하여 강의명을 가져오기 */
 select 
