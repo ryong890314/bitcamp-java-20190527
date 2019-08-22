@@ -3,10 +3,9 @@ package com.eomcs.lms.handler;
 import java.io.BufferedReader;
 import java.io.PrintStream;
 import com.eomcs.lms.dao.BoardDao;
-import com.eomcs.lms.domain.Board;
 import com.eomcs.util.Input;
 
-public class BoardAddCommand implements Command {
+public class BoardDeleteCommand implements Command {
 
   private BoardDao boardDao;
 
@@ -16,21 +15,28 @@ public class BoardAddCommand implements Command {
   // => 의존 객체를 강제로 설정하게 만드는 방법? 생성자를 정의하는 것이다.
   // 다음과 같이 의존 객체를 넘겨 받는 생성자를 정의하는 것이다.
 
-  public BoardAddCommand(BoardDao boardDao) {
+  public BoardDeleteCommand(BoardDao boardDao) {
     this.boardDao = boardDao;
+
   }
 
   @Override
   public void execute(BufferedReader in, PrintStream out) {
+
     try {
-      Board board = new Board();
-      board.setContents(Input.getStringValue(in, out, "내용?"));
-      boardDao.insert(board);
-      out.println("저장하였습니다.");
+      int no = Input.getIntValue(in, out, "번호?");
+
+      if (boardDao.delete(no) > 0) {
+        out.println("게시글을 삭제했습니다.");
+      } else {
+        out.println("해당 데이터가 없습니다.");
+      }
     } catch (Exception e) {
-      out.println("데이터를 저장에 실패했습니다.");
+
+      System.out.println("게시글 삭제에 실패했습니다.");
       System.out.println(e.getMessage());
     }
-  }
-}
 
+  }
+
+}

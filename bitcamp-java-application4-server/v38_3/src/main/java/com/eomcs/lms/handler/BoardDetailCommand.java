@@ -6,7 +6,7 @@ import com.eomcs.lms.dao.BoardDao;
 import com.eomcs.lms.domain.Board;
 import com.eomcs.util.Input;
 
-public class BoardAddCommand implements Command {
+public class BoardDetailCommand implements Command {
 
   private BoardDao boardDao;
 
@@ -16,21 +16,30 @@ public class BoardAddCommand implements Command {
   // => 의존 객체를 강제로 설정하게 만드는 방법? 생성자를 정의하는 것이다.
   // 다음과 같이 의존 객체를 넘겨 받는 생성자를 정의하는 것이다.
 
-  public BoardAddCommand(BoardDao boardDao) {
+  public BoardDetailCommand(BoardDao boardDao) {
     this.boardDao = boardDao;
+
   }
 
   @Override
   public void execute(BufferedReader in, PrintStream out) {
     try {
-      Board board = new Board();
-      board.setContents(Input.getStringValue(in, out, "내용?"));
-      boardDao.insert(board);
-      out.println("저장하였습니다.");
+      // 클라이언트에게 번호를 요구하여 받는다.
+      int no = Input.getIntValue(in, out, "번호? ");
+      
+      Board board = boardDao.findBy(no);
+      
+      if (board == null) {
+        out.println("해당 번호의 데이터가 없습니다!");
+        return;
+      }
+      
+      out.printf("내용: %s\n", board.getContents());
+      out.printf("작성일: %s\n", board.getCreatedDate());
+      
     } catch (Exception e) {
-      out.println("데이터를 저장에 실패했습니다.");
+      out.println("데이터 조회에 실패했습니다!");
       System.out.println(e.getMessage());
     }
   }
 }
-
