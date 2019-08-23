@@ -22,35 +22,34 @@ import java.util.concurrent.Executor;
 // 커넥션 객체의 역할을 수행한다.
 // => 실제 메서드가 호출되면 진짜 커넥션 객체에게 전달한다.
 // => 왜 만듦?
-// - 원래 커넥션 객체의 메서드의 기능을 변경하기 위함이다.
-// - 프록시 패턴을 사용하면 이런 상황을 처리할 수 있다.
+//    - 원래 커넥션 객체의 메서드의 기능을 변경하기 위함이다.
+//    - 프록시 패턴을 사용하면 이런 상황을 처리할 수 있다.
 // 프록시 패턴?
-// => 다른 객체에게는 원래 객체인 것처럼 보여야 하기 때문에
-// 원래의 객체와 같은 인터페이스를 구현한다.
+// => 다른 객체에게는 원래 객체인 것처럼 보여야 하기 때문에 
+//    원래의 객체와 같은 인터페이스를 구현한다.
 // => 그러나 실제 일을 할 때는 자신이 하는 것이 아니라 
-// 원래 객체에게 떠넘긴다.(위임)
-// => 이때 위임하기 전에 추가하거나 변경하고 싶은 작업이 있다면
-// 처리하면 되는 것이다.
+//    원래 객체에게 떠넘긴다.(위임)
+// => 이때 위임하기 전에 추가하거나 변경하고 싶은 작업이 있다면 
+//    처리하면 되는 것이다.
 //
 public class TxConnection implements Connection {
 
   private Connection origin;
   
+  public TxConnection(Connection origin) {
+    this.origin = origin;
+  }
+  
   // 기존 메서드 중에서 close() 대해서는 변경 작업을 추가한다.
   public void close() throws SQLException {
     // close()를 호출하더라도 닫지 않는다.
-    //realClose()를 호출할 때에 진짜 닫는다.
-//    origin.close();
+    // realClose()를 호출할 때에 진짜 닫는다.
+    //origin.close();
   }
   
   // TxConnection에만 있는 메서드
-  
-  public void realClose() throws SQLException{
+  public void realClose() throws SQLException {
     origin.close();
-  }
-
-  public TxConnection(Connection origin) {
-    this.origin = origin;
   }
 
   public <T> T unwrap(Class<T> iface) throws SQLException {
@@ -93,7 +92,7 @@ public class TxConnection implements Connection {
     origin.rollback();
   }
 
-
+ 
 
   public boolean isClosed() throws SQLException {
     return origin.isClosed();
