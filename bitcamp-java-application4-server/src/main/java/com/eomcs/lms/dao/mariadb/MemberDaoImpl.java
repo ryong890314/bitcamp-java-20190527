@@ -5,86 +5,58 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import com.eomcs.lms.dao.MemberDao;
 import com.eomcs.lms.domain.Member;
 import com.eomcs.util.DataSource;
 
 public class MemberDaoImpl implements MemberDao {
 
+  SqlSessionFactory sqlSessionFactory;
   DataSource dataSource;
   
-  public MemberDaoImpl(DataSource conFactory) {
+  public MemberDaoImpl(SqlSessionFactory sqlSessionFactory, DataSource conFactory) {
+    this.sqlSessionFactory = sqlSessionFactory; 
     this.dataSource = conFactory;
   }
   
   @Override
   public int insert(Member member) throws Exception {
-    try (Connection con = dataSource.getConnection();
-        PreparedStatement stmt = con.prepareStatement(
-            "insert into lms_member(name,email,pwd,cdt,tel,photo)"
-            + " values(?,?,password(?),now(),?,?)")) {
-
-      stmt.setString(1, member.getName());
-      stmt.setString(2, member.getEmail());
-      stmt.setString(3, member.getPassword());
-      stmt.setString(4, member.getTel());
-      stmt.setString(5, member.getPhoto());
-      
-      return stmt.executeUpdate();
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+    
+    try {
+      int count = sqlSession.insert("MemberDao.insert", member);
+      sqlSession.commit();
+      return count;
+    } catch (Exception e) {
+      sqlSession.rollback();
+      throw e;
+    } finally {
+      sqlSession.close();
     }
   }
 
   @Override
   public List<Member> findAll() throws Exception {
-    try (Connection con = dataSource.getConnection();
-        PreparedStatement stmt = con.prepareStatement(
-            "select member_id,name,email,tel,cdt"
-            + " from lms_member"
-            + " order by name asc")) {
-      
-      try (ResultSet rs = stmt.executeQuery()) {
-        ArrayList<Member> list = new ArrayList<>();
-        while (rs.next()) {
-          Member member = new Member();
-          member.setNo(rs.getInt("member_id"));
-          member.setName(rs.getString("name"));
-          member.setEmail(rs.getString("email"));
-          member.setTel(rs.getString("tel"));
-          member.setRegisteredDate(rs.getDate("cdt"));
-          
-          list.add(member);
-        }
-        return list;
-      }
+    try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+      return sqlSession.selectList("MemberDao.findAll");
     }
   }
 
   @Override
   public Member findBy(int no) throws Exception {
-    try (Connection con = dataSource.getConnection();
-        PreparedStatement stmt = con.prepareStatement(
-            "select *"
-            + " from lms_member"
-            + " where member_id=?")) {
-      
-      stmt.setInt(1, no);
-      
-      try (ResultSet rs = stmt.executeQuery()) {
-        if (rs.next()) {
-          Member member = new Member();
-          member.setNo(rs.getInt("member_id"));
-          member.setName(rs.getString("name"));
-          member.setEmail(rs.getString("email"));
-          member.setRegisteredDate(rs.getDate("cdt"));
-          member.setTel(rs.getString("tel"));
-          member.setPhoto(rs.getString("photo"));
-          
-          return member;
-          
-        } else {
-          return null;
-        }
-      }
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+    try {
+      Member member = sqlSession.selectOne("MemberDao.findBy", no);
+
+      return member;
+    } catch (Exception e) {
+      sqlSession.rollback();
+      throw e;
+
+    } finally {
+      sqlSession.close();
     }
   }
   
@@ -122,31 +94,16 @@ public class MemberDaoImpl implements MemberDao {
 
   @Override
   public int update(Member member) throws Exception {
-    try (Connection con = dataSource.getConnection();
-        PreparedStatement stmt = con.prepareStatement(
-            "update lms_member set"
-                + " name=?, email=?, pwd=password(?), tel=?, photo=?"
-                + " where member_id=?")) {
-      stmt.setString(1, member.getName());
-      stmt.setString(2, member.getEmail());
-      stmt.setString(3, member.getPassword());
-      stmt.setString(4, member.getTel());
-      stmt.setString(5, member.getPhoto());
-      stmt.setInt(6, member.getNo());
-      
-      return stmt.executeUpdate();
+    try (SqlSession sqlSession = sqlSessionFactory.openSession(true)) {
+      return sqlSession.update("MemberDao.update", member);
     }
   }
 
   @Override
   public int delete(int no) throws Exception {
-    try (Connection con = dataSource.getConnection();
-        PreparedStatement stmt = con.prepareStatement(
-            "delete from lms_member where member_id=?")) {
+    try (SqlSession sqlSession = sqlSessionFactory.openSession(true)) {
       
-      stmt.setInt(1, no);
-      
-      return stmt.executeUpdate();
+      return sqlSession.delete("MemberDao.delete", no);
     }
   }
   

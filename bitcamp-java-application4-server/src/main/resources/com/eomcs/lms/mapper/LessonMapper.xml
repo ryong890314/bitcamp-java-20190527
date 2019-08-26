@@ -4,49 +4,46 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="LessonDao">
 
-  <select id="findAll" resultType="com.eomcs.lms.domain.Lesson">
-select
-lesson_id as no,
-titl as title ,
-sdt as startDate,
-edt,
-tot_hr
-from lms_lesson
-order by sdt desc
-  </select>
-  
-  <select id="findBy" 
-          parameterType="int" 
-          resultType="com.eomcs.lms.domain.Lesson">
-      select 
-      board_id as no, /* Board의 setNo(컬럼값)를 호출하여 컬럼값을 Board 객체에 담는다.*/
-      conts as contents, /* Board의 setContents(컬럼값) 호출 */
-      cdt as createdDate, /* Board의 setCreatedDate(컬럼값) 호출 */
-      vw_cnt as viewCount /* Board의 setViewCount(컬럼값) 호출 */
-    from lms_board
-    where board_id=#{haha} /* 파라미터의 타입이 자바 원시타입일 경우 이름은 마음대로 */ 
-  </select>
-  
-  <update id="increaseViewCount" parameterType="int">
-  update lms_board set
-  vw_cnt = vw_cnt + 1
-  where board_id=#{value}
-  </update>
-  
-  <insert id="insert" parameterType="com.eomcs.lms.domain.Lesson">
-  insert into lms_lesson(sdt,edt,tot_hr,day_hr,titl,conts)
-  values(#{startDate},#{endDate},#{totalHours},#{dayHours},#{title},#{contents})
-  </insert>
-  
-  <update id="update" parameterType="com.eomcs.lms.domain.Lesson">
-  update lms_board set
-  conts=#{contents} /* getContents()의 리턴 값이 놓인다. */
-  where board_id=#{no} /* getNo()의 리턴 값이 놓인다. */
-  </update>
-  
-  <delete id="delete" parameterType="int">
-  delete from lms_board 
-  where board_id=#{value}
-  </delete>
-  
+	<select id="findAll" resultType="com.eomcs.lms.domain.Lesson">
+		select
+		lesson_id as no,
+		titl as title,
+		sdt as startDate,
+		edt as endDate,
+		tot_hr as totalHours
+		from lms_lesson
+		order by sdt desc
+	</select>
+
+	<select id="findBy" parameterType="int"
+		resultType="com.eomcs.lms.domain.Lesson">
+		select
+		lesson_id as no,
+		titl as title,
+		conts as contents,
+		sdt as startDate,
+		edt as endDate,
+		tot_hr as totalHours,
+		day_hr as dayHours
+		from lms_lesson
+		where lesson_id=#{hehe}
+	</select>
+
+	<insert id="insert" parameterType="com.eomcs.lms.domain.Lesson">
+		insert into lms_lesson(sdt,edt,tot_hr,day_hr,titl,conts)
+		values(#{startDate},#{endDate},#{totalHours},#{dayHours},#{title},#{contents})
+	</insert>
+
+	<update id="update" parameterType="com.eomcs.lms.domain.Lesson">
+		update lms_lesson set
+		titl=#{title}, conts=#{contents}, sdt=#{startDate}, edt=#{endDate},
+		tot_hr=#{totalHours}, day_hr=#{dayHours}
+		where lesson_id=#{no}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		delete from lms_lesson
+		where lesson_id=#{value}
+	</delete>
+
 </mapper>
