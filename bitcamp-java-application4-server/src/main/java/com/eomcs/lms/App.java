@@ -1,7 +1,8 @@
-// v41_1 : 커넥션풀 도입하기
+// v43_1 : Mybatis 도입하기
 package com.eomcs.lms;
 
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.ServerSocket;
@@ -9,6 +10,9 @@ import java.net.Socket;
 import java.util.HashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.eomcs.lms.dao.BoardDao;
 import com.eomcs.lms.dao.LessonDao;
 import com.eomcs.lms.dao.MemberDao;
@@ -30,6 +34,7 @@ import com.eomcs.lms.handler.LessonDeleteCommand;
 import com.eomcs.lms.handler.LessonDetailCommand;
 import com.eomcs.lms.handler.LessonListCommand;
 import com.eomcs.lms.handler.LessonUpdateCommand;
+import com.eomcs.lms.handler.LoginCommand;
 import com.eomcs.lms.handler.MemberAddCommand;
 import com.eomcs.lms.handler.MemberDeleteCommand;
 import com.eomcs.lms.handler.MemberDetailCommand;
@@ -74,8 +79,24 @@ public class App {
       PlatformTransactionManager txManager = 
           new PlatformTransactionManager(dataSource);
       
+      // Mybatis의 SQL 실행 도구 준비
+      // => Mybatis 설정 파일을 읽을 때 사용할 입력스트림 도구를 준비한다.
+      InputStream inputStream = 
+          Resources.getResourceAsStream("com/eomcs/lms/conf/mybatis-config.xml");
+      
+      // => SQL을 실행할 때 사용할 도구(SqlSession;샌드위치)를 만들어주는 
+      //    생성기(SqlSessionFactory;파리바게트) 공장(SqlSessionFactoryBuilder)를 준비한다.
+      //
+      /*
+      SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
+      SqlSessionFactory factory = builder.build(inputStream);
+      SqlSession sqlSession = factory.openSession();
+      */
+      SqlSessionFactory sqlSessionFactory =
+        new SqlSessionFactoryBuilder().build(inputStream);
+      
       // Command 객체가 사용할 데이터 처리 객체를 준비한다.
-      BoardDao boardDao = new BoardDaoImpl(dataSource);
+      BoardDao boardDao = new BoardDaoImpl(sqlSessionFactory);
       MemberDao memberDao = new MemberDaoImpl(dataSource);
       LessonDao lessonDao = new LessonDaoImpl(dataSource);
       PhotoBoardDao photoBoardDao = new PhotoBoardDaoImpl(dataSource);
@@ -110,6 +131,8 @@ public class App {
       commandMap.put("/photoboard/list", new PhotoBoardListCommand(photoBoardDao));
       commandMap.put("/photoboard/update", 
           new PhotoBoardUpdateCommand(txManager, photoBoardDao, photoFileDao));
+      
+      commandMap.put("/auth/login", new LoginCommand(memberDao));
       
     } catch (Exception e) {
       System.out.println("DBMS에 연결할 수 없습니다!");
