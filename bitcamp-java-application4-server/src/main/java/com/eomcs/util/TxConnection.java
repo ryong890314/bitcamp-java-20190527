@@ -46,6 +46,11 @@ public class TxConnection implements Connection {
     // realClose()를 호출할 때에 진짜 닫는다.
     //origin.close();
   }
+  
+  // TxConnection에만 있는 메서드
+  public void realClose() throws SQLException {
+    origin.close();
+  }
 
   public <T> T unwrap(Class<T> iface) throws SQLException {
     return origin.unwrap(iface);
@@ -265,5 +270,7 @@ public class TxConnection implements Connection {
     return origin.getNetworkTimeout();
   }
   
-
 }
+
+
+
