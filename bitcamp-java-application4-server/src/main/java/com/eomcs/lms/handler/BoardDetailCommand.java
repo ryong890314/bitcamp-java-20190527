@@ -2,25 +2,24 @@ package com.eomcs.lms.handler;
 
 import java.io.BufferedReader;
 import java.io.PrintStream;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
 import com.eomcs.lms.dao.BoardDao;
 import com.eomcs.lms.domain.Board;
+import com.eomcs.util.Component;
 import com.eomcs.util.Input;
 
+@Component("/board/detail")
 public class BoardDetailCommand implements Command {
   
-  private SqlSessionFactory sqlSessionFactory;
+  private BoardDao boardDao;
   
-  public BoardDetailCommand(SqlSessionFactory sqlSessionFactory) {
-    this.sqlSessionFactory = sqlSessionFactory;
+  public BoardDetailCommand(BoardDao boardDao) {
+    this.boardDao = boardDao;
   }
+  
   
   @Override
   public void execute(BufferedReader in, PrintStream out) {
-    try (SqlSession sqlSession = sqlSessionFactory.openSession()){
-      BoardDao boardDao = sqlSession.getMapper(BoardDao.class);
-      
+    try {
       // 클라이언트에게 번호를 요구하여 받는다.
       int no = Input.getIntValue(in, out, "번호? ");
       

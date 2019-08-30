@@ -6,8 +6,10 @@ import java.util.List;
 import com.eomcs.lms.dao.PhotoBoardDao;
 import com.eomcs.lms.domain.PhotoBoard;
 import com.eomcs.lms.domain.PhotoFile;
+import com.eomcs.util.Component;
 import com.eomcs.util.Input;
 
+@Component("/photoboard/datail")
 public class PhotoBoardDetailCommand implements Command {
   
   private PhotoBoardDao photoBoardDao;

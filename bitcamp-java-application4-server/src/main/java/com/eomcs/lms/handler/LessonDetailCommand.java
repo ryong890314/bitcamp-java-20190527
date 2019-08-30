@@ -4,8 +4,10 @@ import java.io.BufferedReader;
 import java.io.PrintStream;
 import com.eomcs.lms.dao.LessonDao;
 import com.eomcs.lms.domain.Lesson;
+import com.eomcs.util.Component;
 import com.eomcs.util.Input;
 
+@Component("/lesson/detail")
 public class LessonDetailCommand implements Command {
   
   private LessonDao lessonDao;

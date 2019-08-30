@@ -5,8 +5,10 @@ import java.io.PrintStream;
 import java.util.HashMap;
 import com.eomcs.lms.dao.MemberDao;
 import com.eomcs.lms.domain.Member;
+import com.eomcs.util.Component;
 import com.eomcs.util.Input;
 
+@Component("/auth/login")
 public class LoginCommand implements Command {
   
   private MemberDao memberDao;

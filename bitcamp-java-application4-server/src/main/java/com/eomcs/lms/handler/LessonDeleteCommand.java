@@ -3,8 +3,10 @@ package com.eomcs.lms.handler;
 import java.io.BufferedReader;
 import java.io.PrintStream;
 import com.eomcs.lms.dao.LessonDao;
+import com.eomcs.util.Component;
 import com.eomcs.util.Input;
 
+@Component("/lesson/delete")
 public class LessonDeleteCommand implements Command {
   
   private LessonDao lessonDao;
@@ -12,7 +14,7 @@ public class LessonDeleteCommand implements Command {
   public LessonDeleteCommand(LessonDao lessonDao) {
     this.lessonDao = lessonDao;
   }
-
+  
   @Override
   public void execute(BufferedReader in, PrintStream out) {
     try {

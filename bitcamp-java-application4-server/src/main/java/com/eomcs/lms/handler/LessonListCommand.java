@@ -5,7 +5,9 @@ import java.io.PrintStream;
 import java.util.List;
 import com.eomcs.lms.dao.LessonDao;
 import com.eomcs.lms.domain.Lesson;
+import com.eomcs.util.Component;
 
+@Component("/lesson/list")
 public class LessonListCommand implements Command {
   
   private LessonDao lessonDao;
@@ -13,7 +15,7 @@ public class LessonListCommand implements Command {
   public LessonListCommand(LessonDao lessonDao) {
     this.lessonDao = lessonDao;
   }
-
+  
   @Override
   public void execute(BufferedReader in, PrintStream out) {
     try {

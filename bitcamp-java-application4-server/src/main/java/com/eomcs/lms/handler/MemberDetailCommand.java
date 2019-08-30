@@ -4,15 +4,17 @@ import java.io.BufferedReader;
 import java.io.PrintStream;
 import com.eomcs.lms.dao.MemberDao;
 import com.eomcs.lms.domain.Member;
+import com.eomcs.util.Component;
 import com.eomcs.util.Input;
 
+@Component("/member/detail")
 public class MemberDetailCommand implements Command {
   private MemberDao memberDao;
   
   public MemberDetailCommand(MemberDao memberDao) {
     this.memberDao = memberDao;
   }
-
+  
   @Override
   public void execute(BufferedReader in, PrintStream out) {
     try {
