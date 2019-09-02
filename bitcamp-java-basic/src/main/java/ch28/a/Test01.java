@@ -17,7 +17,7 @@ public class Test01 {
   @MyAnnotation // 필드에 붙일 수 있다.
   static int a;
   
-  @MyAnnotation int b; // 애노테이션을 붙인 후에 바로 코드를 작성해도 된다.
+  @MyAnnotation int b; // 애노테이션을 붙인 후에 바로 코드를 작성해도 된다. non static field
   
   @MyAnnotation // 메서드 선언에 붙일 수 있다.
   void m1(
@@ -27,9 +27,9 @@ public class Test01 {
     
     @MyAnnotation int local; // 로컬변수 선언에 붙일 수 있다.
     
-    //@MyAnnotation System.out.println("okok"); // 그러나 다른 일반 문장에는 붙일 수 없다.
+//    @MyAnnotation System.out.println("okok"); // 그러나 다른 일반 문장에는 붙일 수 없다.
     
-    //@MyAnnotation // 다른 일반 문장에는 붙일 수 없다.
+//    @MyAnnotation // 다른 일반 문장에는 붙일 수 없다.
     for (int i = 0; i < 100; i++) {
       @MyAnnotation int a; // 로컬 변수 선언에 붙일 수 있다.
     }
