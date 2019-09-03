@@ -13,7 +13,6 @@ public class Test01_2 {
     System.out.println("[XML IoC 컨테이너]");
     SpringUtils.printObjects(iocContainer1);
     
-    
     ApplicationContext iocContainer2 = 
         new AnnotationConfigApplicationContext(AppConfig.class);
     System.out.println("[Java Config IoC 컨테이너]");
