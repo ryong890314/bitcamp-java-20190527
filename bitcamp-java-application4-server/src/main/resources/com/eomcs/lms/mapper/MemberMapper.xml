@@ -40,10 +40,10 @@
     <include refid="where1"/>
   </select>
 
-  <select id="findByKeyword" 
-  parameterType="string"
-  resultMap="MemberMap">
-  <bind name="pattern" value="'%' + _parameter + '%'"/>
+  <select id="findByKeyword"
+          parameterType="string"
+          resultMap="MemberMap">
+    <bind name="pattern" value="'%' + _parameter + '%'"/>
     <include refid="basicColumn"/>
     from lms_member
     where name like #{pattern}

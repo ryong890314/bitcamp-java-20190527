@@ -26,6 +26,7 @@ public class LoginCommand {
       params.put("password", Input.getStringValue(in, out, "암호? "));
       
       Member member = memberDao.findByEmailPassword(params);
+      
       if (member == null) {
         out.println("이메일 또는 암호가 맞지 않습니다!");
       } else {

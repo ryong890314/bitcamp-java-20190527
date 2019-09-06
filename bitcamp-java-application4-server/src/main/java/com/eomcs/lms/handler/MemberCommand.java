@@ -16,7 +16,7 @@ public class MemberCommand {
   public MemberCommand(MemberDao memberDao) {
     this.memberDao = memberDao;
   }
-  
+
   @RequestMapping("/member/add") // 클라이언트 요청이 들어 왔을 때 이 메서드를 호출하라고 표시한다.
   public void add(BufferedReader in, PrintStream out) {
     try {
@@ -35,7 +35,7 @@ public class MemberCommand {
       System.out.println(e.getMessage());
     }
   }
-
+  
   @RequestMapping("/member/delete") // 클라이언트 요청이 들어 왔을 때 이 메서드를 호출하라고 표시한다.
   public void delete(BufferedReader in, PrintStream out) {
     try {
@@ -111,7 +111,6 @@ public class MemberCommand {
     }
   }
 
-  
   @RequestMapping("/member/update") // 클라이언트 요청이 들어 왔을 때 이 메서드를 호출하라고 표시한다.
   public void update(BufferedReader in, PrintStream out) {
     try {
@@ -161,5 +160,4 @@ public class MemberCommand {
       System.out.println(e.getMessage());
     }
   }
-  
 }
