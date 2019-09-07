@@ -100,7 +100,6 @@ public class App implements HttpRequestHandler {
             obj.getClass().getSimpleName(),
             m.getName()));
       }
-
     });
 
     return mapping;
