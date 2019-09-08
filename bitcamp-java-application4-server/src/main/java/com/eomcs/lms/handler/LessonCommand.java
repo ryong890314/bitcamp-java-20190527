@@ -1,7 +1,5 @@
 package com.eomcs.lms.handler;
 
-import java.io.BufferedReader;
-import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.List;
@@ -9,7 +7,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.eomcs.lms.dao.LessonDao;
 import com.eomcs.lms.domain.Lesson;
-import com.eomcs.util.Input;
 import com.eomcs.util.ServletRequest;
 import com.eomcs.util.ServletResponse;
 
@@ -67,27 +64,31 @@ public class LessonCommand {
   }
   
   @RequestMapping("/lesson/delete") // 클라이언트 요청이 들어 왔을 때 이 메서드를 호출하라고 표시한다.
-  public void delete(BufferedReader in, PrintStream out) {
+  public void delete(ServletRequest request, ServletResponse response) {
+    PrintWriter out = response.getWriter();
+    out.println("<html><head><title>수업 삭제</title>"
+        + "<meta http-equiv='Refresh' content='1;url=/lesson/list'>"
+        + "</head>");
+    out.println("<body><h1>수업 삭제</h1>");
     try {
-
-      int no = Input.getIntValue(in, out, "번호? ");
-      
+      int no = Integer.parseInt(request.getParameter("no"));
       if (lessonDao.delete(no) > 0) {
-        out.println("삭제하였습니다.");
+        out.println("<p>삭제하였습니다.</p>");
       } else {
-        out.println("해당 데이터가 없습니다.");
+        out.println("<p>해당 데이터가 없습니다.</p>");
       }
       
     } catch (Exception e) {
-      out.println("데이터 삭제에 실패했습니다!");
+      out.println("<p>데이터 삭제에 실패했습니다!</p>");
       System.out.println(e.getMessage());
     }
+    out.println("</body></html>");
   }
 
   @RequestMapping("/lesson/detail") // 클라이언트 요청이 들어 왔을 때 이 메서드를 호출하라고 표시한다.
   public void detail(ServletRequest request, ServletResponse response) {
     PrintWriter out = response.getWriter();
-    out.println("<html><head><title>수업 상세<title></head>");
+    out.println("<html><head><title>수업 상세</title></head>");
     out.println("<body><h1>수업 상세</h1>");
     try {
       int no = Integer.parseInt(request.getParameter("no"));
@@ -104,9 +105,14 @@ public class LessonCommand {
             lesson.getTitle());
         out.printf("수업내용: <textarea name='contents' rows='1' cols='50'>%s</textarea><br>\n",
             lesson.getContents());
-        out.printf("기간: %s ~ %s\n", lesson.getStartDate(), lesson.getEndDate());
-        out.printf("총수업시간: %d\n", lesson.getTotalHours());
-        out.printf("일수업시간: %d\n", lesson.getDayHours());
+        out.printf("시작일: <textarea name='startDate' rows='1' cols='50'>%s</textarea><br>\n",
+            lesson.getStartDate());
+        out.printf("종료일: <textarea name='endDate' rows='1' cols='50'>%s</textarea><br>\n",
+            lesson.getEndDate());
+        out.printf("총수업시간: <textarea name='totalHours' rows='1' cols='50'>%s</textarea><br>\n",
+            lesson.getTotalHours());
+        out.printf("일수업시간: <textarea name='dayHours' rows='1' cols='50'>%s</textarea><br>\n",
+            lesson.getDayHours());
         out.println("<button>변경</button>");
         out.printf("<a href='/lesson/delete?no=%d'>삭제</a>\n", lesson.getNo());
         out.println("</form>");
