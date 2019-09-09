@@ -1,4 +1,4 @@
-// v55_1 : Servlet 컨테이너 도입하기
+// v54_1 : Apache의 HttpClient를 이용하여 HTTP 서버 만들기
 package com.eomcs.lms;
 
 import java.io.IOException;
