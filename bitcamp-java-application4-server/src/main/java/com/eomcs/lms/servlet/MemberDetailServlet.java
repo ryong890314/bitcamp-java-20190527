@@ -25,11 +25,21 @@ public class MemberDetailServlet extends HttpServlet {
   }
 
   @Override
-  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+  public void doGet(HttpServletRequest request, HttpServletResponse response) 
+      throws IOException, ServletException {
+    
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
-    out.println("<html><head><title>회원 상세</title></head>");
-    out.println("<body><h1>회원 상세</h1>");
+    out.println("<html><head><title>회원 상세</title>"
+        + "<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'>"
+        + "<link rel='stylesheet' href='/css/common.css'>"
+        + "</head>");
+    out.println("<body>");
+
+    request.getRequestDispatcher("/header").include(request, response);
+    
+    out.println("<div id='content'>");
+    out.println("<h1>회원 상세</h1>");
     
     try {
       int no = Integer.parseInt(request.getParameter("no"));
@@ -39,7 +49,10 @@ public class MemberDetailServlet extends HttpServlet {
         out.println("<p>해당 번호의 데이터가 없습니다!</p>");
 
       } else {
-        out.println("<form action='/member/update' method='post'>");
+        out.println("<form action='/member/update' method='post' enctype='multipart/form-data'>");
+        out.printf("<img src='/upload/member/%s' class='photo1'><br>\n", 
+            member.getPhoto());
+        out.println("<input type='file' name='photo'><br>");
         out.printf("번호: <input type='text' name='no' value='%d' readonly><br>\n",
             member.getNo());
         out.printf("이름: <input type='text' name='name' value='%s'><br>\n",
@@ -48,8 +61,6 @@ public class MemberDetailServlet extends HttpServlet {
             member.getEmail());
         out.printf("암호: <input type='text' name='password' value='%s'><br>\n",
             member.getPassword());
-        out.printf("사진: <input type='text' name='photo' value='%s'><br>\n",
-            member.getPhoto());
         out.printf("전화: <input type='text' name='tel' value='%s'><br>\n",
             member.getTel());
         out.printf("가입일: %s<br>\n",
@@ -63,6 +74,8 @@ public class MemberDetailServlet extends HttpServlet {
       throw new RuntimeException(e);
       
     } finally {
+      out.println("</div>");
+      request.getRequestDispatcher("/footer").include(request, response);
       out.println("</body></html>");
     }
   }
