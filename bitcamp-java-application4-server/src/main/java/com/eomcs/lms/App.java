@@ -1,10 +1,11 @@
-// v57_1 : JSP를 활용하여 서블릿에서 출력 기능 분리하기 
+// v58_2 : Page Controller를 일반 클래스(Plain Old Java Object)로 전환하기
 package com.eomcs.lms;
 
 // 작업:
-// => /webapp/jsp/board 폴더 생성
-// => BoardXxxServlet 에서 출력 기능을 JSP로 이전
-// => /webapp/jsp/board/*.jsp 생성
+// => Command 인터페이스 생성
+// => XxxServlet을 XxxCommand로 전환
+// => 커맨드 객체의 관리 주체를 서블릿 컨테이너에서 Spring IoC 컨테이너로 이전.
+// => DispatcherServlet 변경
 //
 //
 // dummy 클래스!

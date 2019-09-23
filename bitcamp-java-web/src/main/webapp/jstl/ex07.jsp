@@ -22,6 +22,13 @@
 <h2>배열</h2>
 <%
 pageContext.setAttribute("names", new String[]{"홍길동", "임꺽정", "유관순"});
+
+/*
+String[] names = (String[]) pageContext.getAttribute("names");
+for (String n : names) {
+  out.println("li>" + n + "</li>");
+}
+*/
 %>
 
 <ul>
@@ -65,6 +72,14 @@ pageContext.setAttribute("names3", names3);
 <h2>CVS(comma separated value) 문자열</h2>
 <%
 pageContext.setAttribute("names4", "홍길동,임꺽정,유관순,김구");
+
+/*
+String str = (String) pageContext.getAttribute("names1");
+String[] values = str.split(",");
+for (String n : values) {
+  out.println("<li>" + n + "</li>");
+}
+*/
 %>
 
 <ul>
