@@ -12,7 +12,7 @@ package com.eomcs.lms;
 // => PhotoFileWriter 생성
 //    - 파일 업로드 처리 코드 분리
 //
-// => com.eomcs.lms.web.json 패키지 생성
+// => com.eomcs.lms.web.json 패키지 생성 
 // => web의 XxxxController를 web.json으로 복사
 // => XxxxController의 path 변경
 // => @RestController로 변경
