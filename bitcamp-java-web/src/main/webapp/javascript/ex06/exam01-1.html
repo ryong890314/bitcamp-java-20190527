@@ -62,17 +62,17 @@ var btn3 = document.querySelector("#btn3");
 btn3.addEventListener("click", () => {
     console.log(this); // arrow function 문법으로 정의한 리스너의 소속은 window 객체이다.
     var str = "Hi1!!";
-    //window.alert(str);
+    window.alert(str);
 });
 btn3.addEventListener("click", () => {
     console.log(this);
     var str = "Hi2!!";
-    //window.alert(str);
+    window.alert(str);
 });
 btn3.addEventListener("click", function() {
   console.log(this); // 일반 함수 문법으로 정의한 리스너의 소속은 태그 객체이다.
     var str = "Hi!!";
-    //window.alert(str);
+    window.alert(str);
 });
 
 </script>

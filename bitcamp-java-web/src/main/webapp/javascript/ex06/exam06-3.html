@@ -18,6 +18,12 @@
   <button id="btn2" type="button">전송</button>
 </form>
 
+<hr>
+
+<form id="form3" action="http://www.daum.net">
+이름(*): <input type="text" id="name2"><br>
+  <button id="btn2" type="button">전송</button>
+</form>
 
 <script>
 "use strict"
@@ -41,7 +47,7 @@ document.querySelector("#btn2").onclick = () => {
   var name = document.querySelector("#name2");
   if (name.value == "") {
     alert("필수 입력 항목이 비어 있습니다.");
-    return;
+    return; // submit 버튼이 아니라 일반 버튼이기 때문에 false를 리턴할 필요가 없다.
   }
   
   // 일반 버튼을 클릭했을 때 입력 폼의 값을 서버에 제출하려면 
