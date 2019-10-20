@@ -20,7 +20,7 @@
      그래서 class 속성에는 인터페이스나 추상 클래스를 지정할 수 없다.
      왜? 인터페이스나 추상클래스는 인스턴스를 생성할 수 없기 때문이다.--%>
 <jsp:useBean id="list" class="java.util.List" scope="page"/>
-<%-- 자바코드로 표현해보면,
+<%-- 자바코드로 표현해보면, 
   java.util.List list = 
      (java.util.List) pageContext.getAttribute("list");
   if (list == null) {
