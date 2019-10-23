@@ -1,7 +1,7 @@
 // v61_1 : Back-end 와 Front-end 분리하기 - 게시물 관리
 package com.eomcs.lms;
 
-// 작업:
+// 작업: 
 // => /webapp/html/board/list.html 생성
 // => /webapp/html/board/form.html 생성
 
