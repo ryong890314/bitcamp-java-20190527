@@ -79,6 +79,11 @@ compile group: 'org.reflections', name: 'reflections', version: '0.9.11'
         // 파일 업로드 처리
     compile group: 'commons-fileupload', name: 'commons-fileupload', version: '1.4'
 
+// Tiles 뷰 템플릿 엔진
+    // https://mvnrepository.com/artifact/org.apache.tiles/tiles-jsp
+compile group: 'org.apache.tiles', name: 'tiles-jsp', version: '3.0.8'
+
+
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:27.1-jre'
 

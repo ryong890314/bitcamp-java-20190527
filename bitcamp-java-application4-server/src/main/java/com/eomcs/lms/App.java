@@ -1,36 +1,34 @@
-// v61_1 : Back-end 와 Front-end 분리하기 - 게시물 관리
+// v62 : 뷰 컴포넌트에 Tiles 도입하기
 package com.eomcs.lms;
 
-// 작업: 
-// => /webapp/html/board/list.html 생성
-// => /webapp/html/board/form.html 생성
-
-// 작업2 : npm(node package maneger)으로 CSS, JS 라이브러리 파일 관리하기
-// => 콘솔에서 /webapp폴더로 이동
-// => npm init 실행
-// - package.json 파일 생성
-// - 자바스크립트 라이브러리에 대한 설정 파일 
-// => 'npm install bootstrap
-// - npm을 통해 외부 라이브러리를 다운로드 받는다.
-// - npm을 실행한 폴더에 node_modules 디렉토리를 자동 생성하고
-// 이 디렉토리에 라이브러리를 자동으로 다운로드 한다.
-// - package.json에 라이브러리 정보가 등록된다.
-// 만약 등록되지 않았다면 다음과 같이 --save 옵션을 붙여 실행하라.
-// 'npm install bootstrap --save'
-// 또는
-// 'npm install --save bootstrap'
-// - package.json 파일에 등록된 라이브러리를 모두 자동으로 다운로드 하고 싶다면, 
-// 다음과 같이 패키지 이름을 지정하지 않고 실행하라
-// 'npm install'
+// 작업1: Tiles 라이브러리를 프로젝트에 추가
+// => build.gradle 변경
+//    - tiles-jsp 라이브러리 추가(mvnrepository.com)
+// => 'gradle eclipse' 실행
+// => 이클립스에서 프로젝트 갱신
 //
-// => /webapp/html/board-2/list.html 변경
-// - css, javascript 파일 경로를 npm 폴더 경로로 변경한다.
+// 작업2: Spring WebMVC 의 Java Config 변경 
+// => com.eomcs.lms.config.WebConfig 변경
+//    - ViewResolver 에 viewClass 설정
+//    - TilesConfigurer 객체 추가
 //
-// 추가 작업:
-// => com.eomcs.lms.config.AppWebApplicationInitializer 변경
-//    - CharacterEncodingFilter 등록
-// => web.xml 변경
-//    - 필터 설정 제거
+// 작업3: Tiles 템플릿 엔진이 사용할 설정 파일 준비
+// => /webapp/WEB-INF/defs/tiles.xml 생성
+//    - 템플릿 레이아웃에 삽입될 타일을 정의한다.
+//
+// 작업4: 템플릿 JSP 파일 준비
+// => /webapp/WEB-INF/tiles/template.jsp 생성
+//    - 템플릿 페이지의 레이아웃을 설계한다.
+// => /webapp/WEB-INF/tiles/header.jsp 생성
+//    - 템플릿 페이지에 삽입될 header.jsp를 생성한다.
+// => /webapp/WEB-INF/tiles/footer.jsp 생성
+//    - 템플릿 페이지에 삽입될 footer.jsp를 생성한다.
+//
+// 작업5: 템플릿에 삽입될 본문 JSP를 생성
+// => /webapp/WEB-INF/views/*/*.jsp 생성
+//    - 템플릿 페이지에 삽입될 JSP를 생성한다. 
+//    - 기존 JSP 파일을 복사하여 편집한다.
+//
 //
 // dummy 클래스!
 // => 기존 버전에서 계속 존재했던 클래스라서 그대로 둠.
