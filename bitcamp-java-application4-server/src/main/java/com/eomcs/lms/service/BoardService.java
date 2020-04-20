@@ -16,13 +16,3 @@ public interface BoardService {
   void delete(int no) throws Exception;
   int size() throws Exception;
 }
-
-
-
-
-
-
-
-
-
-
